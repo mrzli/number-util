@@ -261,8 +261,8 @@ describe('number-utils', () => {
           expect(
             padNonNegativeIntWithZeroes(
               example.input.value,
-              example.input.maxLength
-            )
+              example.input.maxLength,
+            ),
           ).toEqual(example.expected);
         });
       }
@@ -314,8 +314,8 @@ describe('number-utils', () => {
           expect(() =>
             padNonNegativeIntWithZeroes(
               example.input.value,
-              example.input.maxLength
-            )
+              example.input.maxLength,
+            ),
           ).toThrowError();
         });
       }
@@ -404,7 +404,7 @@ describe('number-utils', () => {
         const actual = clampNumber(
           example.input.value,
           example.input.min,
-          example.input.max
+          example.input.max,
         );
         expect(actual).toEqual(example.expected);
       });

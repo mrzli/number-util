@@ -25,7 +25,7 @@ export function parseIntegerOrThrow(input: string): number {
 
 export function padNonNegativeIntWithZeroes(
   value: number,
-  maxLength: number
+  maxLength: number,
 ): string {
   if (!Number.isInteger(value) || value < 0) {
     throw new Error("'value' must be an integer greater or equal to zero");

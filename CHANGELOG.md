@@ -4,6 +4,14 @@ All notable changes to the "number-util" will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.2] - 2023-12-26
+
+### Changed
+
+- Switch to `pnpm` package management.
+- Update tooling configurations.
+- Update dependencies to latest versions.
+
 ## [0.0.1] - 2023-07-15
 
 ### Added
