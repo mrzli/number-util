@@ -4,6 +4,17 @@ All notable changes to the "number-util" will be documented in this file.
 
 ## [Unreleased]
 
+## [0.0.3] - 2023-12-26
+
+### Changed
+
+- Rename `clampNumber` to `clamp`.
+- Rename `getRandomInteger` to `randomInteger`.
+
+### Added
+
+- Add `round` function.
+
 ## [0.0.2] - 2023-12-26
 
 ### Changed

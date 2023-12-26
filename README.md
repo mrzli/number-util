@@ -8,44 +8,106 @@ Number utility functions.
 npm install --save @gmjs/number-util
 ```
 
+## Usage
+
+```ts
+import { clamp } from '@gmjs/number-util';
+
+const output = clamp(15, 10, 12);
+console.log(output);
+// 12
+```
+
 ## API
 
-- `parseFloatOrThrow(input: string): number`
-  - Description
-    - Parses a string to a float, or throws an error if the input is of invalid type or format.
-  - Parameters
-    - `input: string`
-      - Description
-        - The string to parse.
-        - If anything other than a string is passed, an error is thrown.
-        - String must exactly represent an integer or a float value in a specific format.
-        - String may start with a `-` sign, or no sign. `+` signs are not allowed.
-        - The whole part of the number must be a list of digits only.
-        - The string may contain a decimal point, followed by a list of digits only. If there is a decimal point, there must be at least one digit after it.
-        - In short, it must satisfy the following regular expression: `^-?\d+(?:\.\d+)?$`
-  - Returns
-    - `number` - The parsed float value.
-- `parseIntegerOrThrow(input: string): number`
-  - Description
-    - Parses a string to an integer, or throws an error if the input is of invalid type or format.
-  - Parameters
-    - `input: string`
-      - Description
-        - The string to parse.
-        - If anything other than a string is passed, an error is thrown.
-        - String must exactly represent an integer value in a specific format.
-        - String may start with a `-` sign, or no sign. `+` signs are not allowed.
-        - The number part must be digits only.
-        - In short, it must satisfy the following regular expression: `^-?\d+$`
-  - Returns
-    - `number` - The parsed integer value.
-- `padNonNegativeIntWithZeroes(value: number, maxLength: number): string`
-  - Description
-    - Pads a non-negative integer with zeroes to the left, to the specified length.
-  - Parameters
-    - `value: number` - The integer to pad. A non-negative integer ie expected, otherwise an error is thrown.
-    - `maxLength: number` - The length to pad to. A positive integer is expected, otherwise an error is thrown.
-- `getRandomInteger(min: number, max: number): number` - Returns a random integer in the `[min, max>` range.
-- `clampNumber(value: number, min: number, max: number): number`
-  - Description
-    - Clamps the `value` number to the specified range.
+#### `clamp`
+
+Clamps the `value` number to the specified range.
+
+```ts
+const output = clamp(15, 10, 12);
+console.log(output);
+// 12
+```
+
+#### `parseFloatOrThrow`
+
+Parses a string to a float, or throws an error if the input is of invalid type or format.
+
+The parsed string must match `^-?\d+(?:\.\d+)?$` regex to be considered valid.
+
+```ts
+const output = parseFloatOrThrow('15.123456');
+console.log(output);
+// 15.123456
+```
+
+Here are some examples of invalid inputs:
+
+```ts
+parseFloatOrThrow('a'); // throws
+parseFloatOrThrow('15.'); // throws
+parseFloatOrThrow('+15'); // throws
+parseFloatOrThrow('.12'); // throws
+parseFloatOrThrow('5e2'); // throws
+```
+
+#### `parseIntegerOrThrow`
+
+Parses a string to an integer, or throws an error if the input is of invalid type or format.
+
+The parsed string must match `^-?\d+$` regex to be considered valid.
+
+```ts
+const output = parseIntegerOrThrow('15');
+console.log(output);
+// 15
+```
+
+Here are some examples of invalid inputs:
+
+```ts
+parseIntegerOrThrow('a'); // throws
+parseIntegerOrThrow('15.2'); // throws
+parseIntegerOrThrow('+15'); // throws
+```
+
+#### `padNonNegativeIntWithZeroes`
+
+Pads a non-negative integer with zeroes to the left, to the specified length.
+
+```ts
+const output = padNonNegativeIntWithZeroes(15, 5);
+console.log(output);
+// '00015'
+```
+
+#### `randomInteger`
+
+Returns a random integer in the `[min, max>` range. In other words, the `min` value is inclusive, and the `max` value is exclusive.
+
+For example, `randomInteger(10, 20)` will return a random integer between `10` and `19` inclusive, it will never return `20`.
+
+```ts
+const output = randomInteger(10, 20);
+console.log(output);
+// 15 (for example, but could be any integer between 10 and 19 inclusive)
+```
+
+#### `round`
+
+Rounds the `value` number to the specified number of decimal places.
+
+```ts
+const output = round(15.123456, 2);
+console.log(output);
+// 15.12
+```
+
+If the `precision` parameter is omitted, the number is rounded to the nearest integer.
+
+```ts
+const output = round(15.123456);
+console.log(output);
+// 15
+```
